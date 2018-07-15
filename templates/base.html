@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title> {% block title %} {% endblock %}</title>
+		<meta charset="utf-8">
+		<meta name="description" content="">
+
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+		<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+		<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Hind|Montserrat">
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
+
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css')}}">
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/mobile.css')}}">
+
+		<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico')}}">
+
+	</head>
+
+	<body>
+		<header class="top-page-header">
+		  <div class="overlay-group mobile-top-nav-area">
+		    <div class="overlay-top"></div>
+		    <div class="overlay-bottom mobile-top-nav">
+		      <p class="close-button"><i class="fa fa-times"></i></p>
+		      
+		      {% for item in nav_menu_items %}
+		      	<p> <a href="{{ url_for(item)}}"> {{ item.capitalize() }} </a></p>
+		      {% endfor %}
+
+		      <p class="text-small text-center">Stay in touch</p>
+
+		      <p class="social-media">
+		  	    {% for item in social_media_items %}
+		  	    	<p> <a href="{{ url }}"> <i class="fa {{item.icon}}"></i></a></p>
+		  	    {% endfor %}
+		  	  </p>
+		    </div>
+		  </div>
+
+		  <div class="{%- if request.path == '/' -%} overlay-bottom {% endif %} wrapper clearfix"> 
+		    <a href={{url_for('index')}} class="logo-area"> 
+		      <img class="logo" src="{{url_for('static', filename='images/logo_oneline.png')}}"></img>
+		    </a>
+		    <div class="navigation-area">
+		      <ul class="navigation">
+		        {% for item in nav_menu_items %}
+		          <li><a href="{{ url_for(item)}}"> {{ item.capitalize() }}</a></li>
+		        {% endfor %}
+		      </ul>
+		    </div>
+		   <!--  <div class="social-media-area">
+		      <ul>
+		        {% for item in social_media_items %}
+		          <li><a href="{{ url }}"> <i class="fa {{item.icon}}"></i></a></li>
+		        {% endfor %}
+		      </ul>
+		    </div> -->
+		    <div class="mobile-hamburger-area">
+		      <button class="btn"><i class="fa fa-bars"></i></button>
+		    </div>
+		  </div>
+		</header>
+		{% block body %}
+		{% endblock %}
+	</body>
+</html>
